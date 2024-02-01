@@ -2,16 +2,22 @@ import { useState } from "react";
 
 export default function App(){
   const [input, setInput] = useState('')
-  const [tasks, setTasks] = useState([
-    'Ir para a academia as 6:00hrs e voltar as 8:00hrs',
-    'Tomar café e ler a Bíblia',
-    'Estudar React + Typescript'
+  const [tasks, setTasks] = useState<string[]>([])
 
-  ])
+  const [editTasks, setEditTasks] = useState({
+    enabled: false,
+    tasks: ''
+
+  })
 
   function handleRegister(){
     if(!input){
       alert("Preencha o nome da sua tarefa!")
+      return;
+    }
+
+    if(editTasks.enabled){
+      handleSaveEdit()
       return;
     }
 
@@ -21,10 +27,34 @@ export default function App(){
     setInput("")
   }
 
+
+  function handleSaveEdit(){
+    const findIndexTasks = tasks.findIndex(tasks => tasks === editTasks.tasks)
+    const allTasks = [...tasks];
+
+    allTasks[findIndexTasks] = input;
+    setTasks(allTasks);
+
+    setEditTasks({
+      enabled: false,
+      tasks: ''
+    })
+    setInput("");
+  }
+
   function handleDelete(item: string){
     const removeTasks = tasks.filter( tasks => tasks !== item)
     setTasks(removeTasks)
 
+  }
+
+  function handleEdit(item: string){
+    setInput(item)
+    setEditTasks({
+      enabled: true,
+      tasks: item
+    })
+  
   }
 
 
@@ -36,12 +66,15 @@ export default function App(){
       value={input}
       onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={handleRegister}>Adicionar tarefa</button>
+      <button onClick={handleRegister}>
+        {editTasks.enabled ? "Atualizar tarefa" : "Adicionar Tarefa"}
+      </button>
       <hr />
 
       {tasks.map((item, index) => (
         <section key={item}>
           <span>{item}</span>
+          <button onClick={() => handleEdit(item)}>Editar</button>
           <button onClick={() => handleDelete(item)}>Excluir</button>
         </section>
       ))} 
