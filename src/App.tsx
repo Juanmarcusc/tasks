@@ -14,6 +14,9 @@ export default function App(){
       alert("Preencha o nome da sua tarefa!")
       return;
     }
+
+    setTasks(tarefas => [...tarefas, input])
+    setInput("")
   }
 
 
@@ -31,6 +34,7 @@ export default function App(){
       {tasks.map((item, index) => (
         <section key={item}>
           <span>{item}</span>
+          <button>Excluir</button>
         </section>
       ))} 
     </div>
