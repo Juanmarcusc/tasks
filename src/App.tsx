@@ -16,7 +16,15 @@ export default function App(){
     }
 
     setTasks(tarefas => [...tarefas, input])
+    /* função JS que faz adicionar todas as tarefas anteriores
+    e acrecentar outras com o input */
     setInput("")
+  }
+
+  function handleDelete(item: string){
+    const removeTasks = tasks.filter( tasks => tasks !== item)
+    setTasks(removeTasks)
+
   }
 
 
@@ -34,7 +42,7 @@ export default function App(){
       {tasks.map((item, index) => (
         <section key={item}>
           <span>{item}</span>
-          <button>Excluir</button>
+          <button onClick={() => handleDelete(item)}>Excluir</button>
         </section>
       ))} 
     </div>
