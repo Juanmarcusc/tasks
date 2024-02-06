@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo} from "react";
+import { useState, useEffect, useRef, useMemo, useCallback} from "react";
 
 export default function App(){
   const inputRef = useRef<HTMLInputElement>(null); 
@@ -32,7 +32,8 @@ export default function App(){
 
   }, [tasks])
 
-  function handleRegister(){
+
+  const handleRegister = useCallback(() => {
     if(!input){
       alert("Preencha o nome da sua tarefa!")
       return;
@@ -47,8 +48,7 @@ export default function App(){
     /* função JS que faz adicionar todas as tarefas anteriores
     e acrecentar outras com o input */
     setInput("")
-    
-  }
+  }, [input, tasks])
 
 
   function handleSaveEdit(){
