@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function App(){
   const [input, setInput] = useState('')
@@ -9,6 +9,14 @@ export default function App(){
     tasks: ''
 
   })
+
+  useEffect(() => {
+    const savesTasks = localStorage.getItem('@task')
+
+    if(savesTasks){
+      setTasks(JSON.parse(savesTasks));
+    }
+  }, [])
 
   function handleRegister(){
     if(!input){
@@ -25,6 +33,8 @@ export default function App(){
     /* função JS que faz adicionar todas as tarefas anteriores
     e acrecentar outras com o input */
     setInput("")
+    localStorage.setItem('@task', JSON.stringify([...tasks, input])) 
+    // localStoraga para salvar as tasks quando atualizar a página.
   }
 
 
@@ -40,11 +50,14 @@ export default function App(){
       tasks: ''
     })
     setInput("");
+    localStorage.setItem('@task', JSON.stringify(allTasks))
   }
 
   function handleDelete(item: string){
     const removeTasks = tasks.filter( tasks => tasks !== item)
     setTasks(removeTasks)
+
+    localStorage.setItem('@task', JSON.stringify(removeTasks))
 
   }
 
