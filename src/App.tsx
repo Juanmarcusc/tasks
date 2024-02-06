@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function App(){
+  const inputRef = useRef<HTMLInputElement>(null); 
+  const firstRender = useRef(true);
+
   const [input, setInput] = useState('')
   const [tasks, setTasks] = useState<string[]>([])
 
@@ -18,6 +21,17 @@ export default function App(){
     }
   }, [])
 
+  useEffect(() => {
+
+    if(firstRender.current){
+      firstRender.current = false;
+      return;
+    }
+
+    localStorage.setItem('@task', JSON.stringify(tasks))
+
+  }, [tasks])
+
   function handleRegister(){
     if(!input){
       alert("Preencha o nome da sua tarefa!")
@@ -33,8 +47,7 @@ export default function App(){
     /* função JS que faz adicionar todas as tarefas anteriores
     e acrecentar outras com o input */
     setInput("")
-    localStorage.setItem('@task', JSON.stringify([...tasks, input])) 
-    // localStoraga para salvar as tasks quando atualizar a página.
+    
   }
 
 
@@ -50,18 +63,20 @@ export default function App(){
       tasks: ''
     })
     setInput("");
-    localStorage.setItem('@task', JSON.stringify(allTasks))
+    
   }
 
   function handleDelete(item: string){
     const removeTasks = tasks.filter( tasks => tasks !== item)
     setTasks(removeTasks)
-
-    localStorage.setItem('@task', JSON.stringify(removeTasks))
-
   }
 
   function handleEdit(item: string){
+
+    inputRef.current?.focus();
+    // focar no input ao clilcar no editar
+    // ? significa se está vazio.
+
     setInput(item)
     setEditTasks({
       enabled: true,
@@ -78,6 +93,7 @@ export default function App(){
       placeholder="Digite o nome da tarefa"
       value={input}
       onChange={(e) => setInput(e.target.value)}
+      ref = {inputRef}
       />
       <button onClick={handleRegister}>
         {editTasks.enabled ? "Atualizar tarefa" : "Adicionar Tarefa"}
