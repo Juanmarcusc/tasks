@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo, useCallback} from "react";
+import "./App.css"
 
 export default function App(){
   const inputRef = useRef<HTMLInputElement>(null); 
@@ -91,8 +92,10 @@ export default function App(){
 
 
   return(
-    <div>
-      <h1>Lista de tarefas</h1>
+    <div className="container">
+      <section className="background-image-title">
+        <h1 className="title">Lista de tarefas</h1>
+      </section>
       <input
       placeholder="Digite o nome da tarefa"
       value={input}
@@ -102,15 +105,13 @@ export default function App(){
       <button onClick={handleRegister}>
         {editTasks.enabled ? "Atualizar tarefa" : "Adicionar Tarefa"}
       </button>
-      <hr />
 
       <strong>Você tem {totalTasks} tarefas</strong>
-      <br /><br />
 
       {tasks.map((item, index) => (
         <section key={item}>
           <span>{item}</span>
-          <button onClick={() => handleEdit(item)}>Editar</button>
+          <button  onClick={() => handleEdit(item)}>Editar</button>
           <button onClick={() => handleDelete(item)}>Excluir</button>
         </section>
       ))} 

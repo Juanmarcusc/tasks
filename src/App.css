@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.title {
+    font-size: 75px;
+    text-align: center; 
+}
+
+.background-image-title {
+    width: 100%; 
+    height: 200px; 
+    background-image: url(/public/background-image-title.jpg); 
+    background-size: cover; 
+    background-position: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin-bottom: 30px;
+}
+
+
+input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+    padding: 5px; 
+    font-size: 16px;
+    border: 2px solid #ccc; 
+    border-radius: 4px; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+    outline: none; 
+    
+}
+
+input:focus {
+    border-color: #007bff; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+  }
+  
+ 
+button {
+    border: none;
+    margin-bottom: 10px; 
+    padding: 5px 10px; 
+    font-size: 16px; 
+    cursor: pointer;
+    border-radius: 4px; 
+}
+
+button:hover {
+   background-color: #007bff; 
+   color: #fff;
+}
+  
+  /* Estilo para a seção de tarefas */
+  section {
+    display: flex; /* Exibir em linha */
+    align-items: center; /* Alinhar itens verticalmente */
+    margin-bottom: 5px; /* Espaçamento inferior */
+  }
+  
+  span {
+    flex: 1; /* Ocupar o espaço restante */
+    padding-right: 10px; /* Espaçamento interno à direita */
+  }
+  
+  /* Estilo para os botões dentro da seção */
+  section button {
+    margin-left: 5px; /* Espaçamento à esquerda */
+  }
