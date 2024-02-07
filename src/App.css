@@ -3,11 +3,6 @@
     padding: 0;
 }
 
-.container {
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-}
 
 .title {
     font-size: 75px;
@@ -30,7 +25,7 @@
 input {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
     padding: 5px; 
     font-size: 16px;
@@ -61,19 +56,19 @@ button:hover {
    color: #fff;
 }
   
-  /* Estilo para a seção de tarefas */
-  section {
-    display: flex; /* Exibir em linha */
-    align-items: center; /* Alinhar itens verticalmente */
-    margin-bottom: 5px; /* Espaçamento inferior */
-  }
+
+section {
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 5px;
+}
   
-  span {
-    flex: 1; /* Ocupar o espaço restante */
-    padding-right: 10px; /* Espaçamento interno à direita */
-  }
+span {
+    flex: 1; 
+    padding-right: 10px; 
+}
   
-  /* Estilo para os botões dentro da seção */
-  section button {
-    margin-left: 5px; /* Espaçamento à esquerda */
-  }
+
+section button {
+    margin-left: 5px; 
+}
